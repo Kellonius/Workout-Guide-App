@@ -1,0 +1,247 @@
+<div class="div left" style="text-align: center" *ngIf="!creatingCustom" (click)="createCustom()">
+  <p class="center">Click here to have a custom workout created for you</p>
+</div>
+
+<div class="div left" *ngIf="creatingCustom">
+  <div class="padding">
+    <p>Describe your experience level</p>
+    <select id="experience">
+      <option value="0">Beginner</option>
+      <option value="1">Intermediate</option>
+      <option value="2">Expert</option>
+    </select>
+    <p>Do you prefer cardio or high intensity training?</p>
+    <select id="cardio">
+      <option value="0">Cardio</option>
+      <option value="1">HIIT</option>
+    </select>
+    <p>Do you prefer to isolate your muscles or upper/lower body splits?</p>
+    <select id="workoutType">
+      <option value="0">Isolate</option>
+      <option value="1">Split</option>
+    </select>
+    <p>How many days per week will you work out?(Minimum 3)</p>
+    <select id="days">
+      <option value="0">3</option>
+      <option value="1">4</option>
+      <option value="2">5</option>
+      <option value="3">6</option>
+      <option value="4">7</option>
+    </select>
+  </div>
+  <div class="suggestButton" (click)="suggestWorkout()">Suggest Workout</div>
+</div>
+
+
+<div class="div right" style="overflow-y:auto" *ngIf="showSuggestion">
+  <p class="padding boldText" *ngIf="experienceLevel == 0">
+    Start with low weight. On day 1, do several different exercises to determine how much weight you can comfortably
+    lift for 12 repetitions.<br /><br />
+    Once you have found a comfortable weight, follow this schedule for each workout, increasing weight by 2 to 5 lbs
+    each week.<br /><br />
+  </p>
+  <p class="padding">
+    Week 1: 3 sets of 12 reps<br />
+    Week 2: 3 sets of 10 reps<br />
+    Week 3: 3 sets of 8 reps<br />
+    Week 4: 4 sets of 6 reps<br />
+    Week 5: 4 sets of 5 reps<br />
+    Week 6: Set 1 - 12 reps, Set 2 - 10 reps, Set 3 - 8 reps, Set 4 - 6 reps, Set 5 - 5 reps<br />
+  </p>
+  <p class="padding boldText">
+    For abs, do this routine as recommended:
+  </p>
+  <p class="padding">
+
+  Captains Chair leg raise<br />
+  Hanging leg raise<br />
+  Ab-wheel rollout<br />
+  Air bicycle<br />
+  Crunches<br />
+  Cable crunches<br />
+
+  </p>
+  <div *ngIf="cardioPreference ==0">
+    <p class="padding boldText">
+      For cardio, do this exercise {{cardioDays}} a week:<br />
+    </p>
+    <p class="padding">
+      Incline treadmill sprints - 5 intervals for 30 seconds at 90-100% exertion with 3-4 minute rest intervals<br />
+      Cycling - 7 intervals for 60 seconds at 90-100% exertion with 2-3 minute active recovery<br />
+      Jump rope - 10 intervals for 45 seconds at 90-100% exertion with 2 minute rest<br />
+    </p>
+    <p class="padding boldText" *ngIf="workoutType == 0 && days == 0">
+      You have selected incompatible options! If you only workout three days a week, and one of those days is reserved
+      for cardio,
+      then you only have two days remaining for lifting weights. Three days are recommended for isolation workouts.
+      Upper/Lower body splits
+      are recommended with these selected options. <br />
+    </p>
+    <p class="padding" *ngIf="upperLower()">
+      Day 1: Upper Body <br />
+      Barbell bench press <br />
+      Tricep pull down <br />
+      Bicep barbell curl <br />
+      Bent over barbell row <br />
+      Lat pulldowns <br />
+      Military press <br />
+      <br />
+      Day 2: Reserved for Cardio and Abs<br />
+
+      <br />
+      Day 3: Lower Body <br />
+      Barbell back squat<br />
+      Romanian dead lift<br />
+      Resistance band leg kickbacks(donkey kicks)<br />
+      Resistance band squat jumps<br />
+      Seated calf raise<br />
+      Barbell front squat<br />
+      Leg Press<br />
+    </p>
+  </div>
+
+  <div class="padding" *ngIf="!upperLower() && days == 0">
+    <p>
+      Day 1: Chest, Triceps, Abs<br />
+
+      Incline dumbbell press<br />
+      Tricep Rope Pushdown<br />
+      Barbell bench press<br />
+      Tricep pull down<br />
+      Abs - see above routine<br/>
+
+      <br />
+      Day 2: Butt, legs calves<br />
+
+      Barbell back squat<br />
+      Romanian dead lift<br />
+      Resistance band leg kickbacks(donkey kicks)<br />
+      Resistance band squat jumps<br />
+      Seated calf raise<br />
+      <br />
+      Day 3: Back, biceps<br />
+
+      Bicep barbell curl<br />
+      One arm dumbbell row<br />
+      Lat pulldowns<br />
+      Bent over barbell row<br />
+      Reverse lat pulldowns<br />
+      Dumbbell curl w/ wrist rotation superset<br />
+
+    </p>
+  </div>
+
+  <div class="padding" *ngIf="!upperLower() && days == 1">
+    <p>
+      Day 1: Chest, Triceps, Abs<br />
+
+      Incline dumbbell press<br />
+      Tricep Rope Pushdown<br />
+      Barbell bench press<br />
+      Tricep pull down<br />
+      Abs - see above routine<br/>
+
+      <br />
+      Day 2: Butt, legs calves<br />
+
+      Barbell back squat<br />
+      Romanian dead lift<br />
+      Resistance band leg kickbacks(donkey kicks)<br />
+      Resistance band squat jumps<br />
+      Seated calf raise<br />
+      <br />
+      Day 3: Back, biceps<br />
+
+      Bicep barbell curl<br />
+      One arm dumbbell row<br />
+      Lat pulldowns<br />
+      Bent over barbell row<br />
+      Reverse lat pulldowns<br />
+      Dumbbell curl w/ wrist rotation superset<br />
+      <br />
+      Day 4: Reserved for Cardio and Abs
+
+  </div>
+
+  <div class="padding" *ngIf="!upperLower() && days >= 2">
+    <p>
+      Day 1: Chest, Triceps, Abs<br />
+      Incline dumbbell press<br />
+      Tricep Rope Pushdown<br />
+      Barbell bench press<br />
+      Tricep pull down<br />
+      Abs - see above routine<br />
+      <br />
+      Day 2: Butt, legs calves<br />
+
+      Barbell back squat<br />
+      Romanian dead lift<br />
+      Resistance band leg kickbacks(donkey kicks)<br />
+      Resistance band squat jumps<br />
+      Seated calf raise<br />
+
+      Day 3: Back, biceps<br />
+
+      Bicep barbell curl<br />
+      One arm dumbbell row<br />
+      Lat pulldowns<br />
+      Bent over barbell row<br />
+      Reverse lat pulldowns<br />
+      Dumbbell curl w/ wrist rotation superset<br />
+      <br />
+      Day 4: Shoulders, abs<br />
+
+      Military press<br />
+      Dumbbell lateral raise<br />
+      Rear delt fly<br />
+      Dumbbell vertical raise<br />
+      Cable/dumbbell press<br />
+      Abs - see above routine<br />
+      <br />
+      Day 5: HIIT Cardio or Legs<br />
+      HIIT Cardio - see above routine<br />
+      Optionally - redo your legs instead of cardio.<br />
+      <br/>
+
+      <span class="padding" *ngIf="!upperLower() && days > 2">*For any days above 5, cycle through the 5 day routine by beginning again at day 1. Working out 7 days a week is not recommended.
+      </span>
+
+    </p>
+  </div>
+
+  <div *ngIf="cardioPreference == 1">
+    <p class="padding" *ngIf="upperLower()">
+      Day 1: Upper Body <br />
+      Barbell bench press <br />
+      Tricep pull down <br />
+      Bicep barbell curl <br />
+      Bent over barbell row <br />
+      Lat pulldowns <br />
+      Military press <br />
+      <br />
+      Day 2: Full Body with abs<br />
+      Incline dumbbell press<br />
+      Tricep Rope Pushdown<br />
+      Barbell back squat<br />
+      Romanian dead lift<br />
+      Resistance band leg kickbacks(donkey kicks)<br />
+      Resistance band squat jumps<br />
+      Reverse lat pulldowns<br />
+      Dumbbell curl w/ wrist rotation superset<br />
+      Rear delt fly<br />
+      Dumbbell vertical raise<br />
+      Cable/dumbbell press<br />
+      Cable crunches<br />
+      <br />
+      Day 3: Lower Body <br />
+      Barbell back squat<br />
+      Romanian dead lift<br />
+      Resistance band leg kickbacks(donkey kicks)<br />
+      Resistance band squat jumps<br />
+      Seated calf raise<br />
+      Barbell front squat<br />
+      Leg Press<br />
+    </p>
+
+  </div>
+</div>
